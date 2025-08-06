@@ -9,7 +9,7 @@ first_name varchar(100),mobile_number int,mail_id varchar(100), location varchar
 
 create table menu (
 menu_id int,varity varchar(100)not null,
-price int unique);
+price int unique,cool_drinks varchar(200) default "unknown");
      
 create table tables(
 table_id int,tablename varchar(100),
@@ -65,8 +65,8 @@ values (1, '2024-01-02 12:00:00', 1, 1),
  select*from tables;
  select*from orders;
  select*from reservation;
- 
 ##----alter
+     
  alter table tables change tablename tab_name varchar(50);
  alter table customer add column last_name varchar(100);
  
@@ -76,7 +76,7 @@ values (1, '2024-01-02 12:00:00', 1, 1),
  ##----drop
  drop database restaurant;
  
- ##_---update
+ ##---update
  update menu set varity ='dish_name';
  update customer set first_name= 'sori' where customer_id=1;
  
@@ -93,7 +93,7 @@ select count(*) from customer where location is null;
 select count(*) from customer where last_name is null;
 select count(*) from customer where location is not null
 
-#-=storing a sting value it is not a null value
+#--storing a sting value it is not a null value
 insert into customer(customer_id,first_name,mobile_number,mail_id,location)
 values (6,"Enok",94747847,"null","pamban");
 ##--example error "null" is a string
@@ -108,8 +108,8 @@ from customer
 where mail_id =  "null";
 
 #--coalesce
- select customer_id,mail_id,location,coalesce(location,"Abc")
- from customer;
+select customer_id,mail_id,location,coalesce(location,"Abc")
+from customer;
  
  #--if null and alias
  
@@ -119,7 +119,8 @@ select customer_id,
        ifnull(location, 'AAA')
 FROM customer;
 
+#--default added values "unknown"
+select * from menu;
 
- 
- 
+ select * from menu;
  
