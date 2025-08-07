@@ -123,4 +123,36 @@ FROM customer;
 select * from menu;
 
  select * from menu;
+
+ #--projection
+ select table_id,customer_id from reservation;
  
+ select * from orders where verify = "yes";
+ 
+ #--like
+ select table_id,tablename from tables where status like "available";
+ 
+ #---between
+select reservation_datetime , customer_id from reservation where table_id between 1 and 5;
+ 
+#--or
+select * from orders where verify = "yes" or "noo";
+
+#--order by,asc
+select * from customer order by first_name  asc;
+#--group by ,sum
+select order_id,sum(quantity) from orders as total_quantity group by order_id;
+#--!=
+select * from tables where tablename != "A";
+#--=
+select * from tables where status = "not";
+#---<,>
+select * from tables where table_id <3;
+select * from menu where menu_id >11;
+
+#--<=,>=
+select * from reservation where reservation_id <= 4;
+select* from orders where quantity >=100;
+
+#--in
+select* from customer where location in ("chennai","karur");
