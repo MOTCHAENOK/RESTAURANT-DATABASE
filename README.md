@@ -154,5 +154,23 @@ select * from menu where menu_id >11;
 select * from reservation where reservation_id <= 4;
 select* from orders where quantity >=100;
 
-#--in
+#--Aggregation,Grouping
+#--sum,group by
+select order_id, sum(quantity) as total_quantity
+from orders 
+group by order_id;
+#--count
+select count(*) as seats
+from tables;
+
+select count(*) as verified_orders
+from orders
+where verify = 'yes';
+
+#--max,min,avg
+select avg(reservation_price) as avg_reservation_price from reservation;
+select max (reservation_price) asmax_reservation_price
+from reservation;
+select min(quantity) as total_quantity from orders;
+
 select* from customer where location in ("chennai","karur");
