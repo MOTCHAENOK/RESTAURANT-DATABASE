@@ -174,3 +174,56 @@ from reservation;
 select min(quantity) as total_quantity from orders;
 
 select* from customer where location in ("chennai","karur");
+
+
+drop table if exists orders;
+
+create table orders (
+    order_id int primary key auto_increment,
+    customer_id int not null,
+    menu_id int not null,
+    quantity int not null
+);
+
+insert into orders (order_id,customer_id, menu_id, quantity)
+values
+(001,1, 10, 2), 
+(002,1, 11, 1),  
+(003,2, 12, 1);   
+
+select c.first_name,c.location,m.varity as menu_item,o.quantity
+from orders o
+join  customer c on o.customer_id = c.customer_id
+join menu m on o.menu_id = m.menu_id;
+
+#----joins
+select c.customer_id, c.first_name, m.varity, o.quantity
+from orders o
+inner join customer c on o.customer_id = c.customer_id
+inner join menu m on o.menu_id = m.menu_id;
+
+select c.customer_id, c.first_name, m.varity, o.quantity
+from customer c
+left join orders o on c.customer_id = o.customer_id
+left join menu m on o.menu_id = m.menu_id;
+
+select c.customer_id, c.first_name, m.varity, o.quantity
+from customer c
+right join orders o on c.customer_id = o.customer_id
+right join menu m on o.menu_id = m.menu_id;
+
+
+select c.customer_id, c.first_name, m.varity, o.quantity
+from customer c
+left join orders o on c.customer_id = o.customer_id
+left join menu m on o.menu_id = m.menu_id
+
+union 
+
+select c.customer_id, c.first_name, m.varity, o.quantity
+from customer c
+right join orders o on c.customer_id = o.customer_id
+right join menu m on o.menu_id = m.menu_id;
+
+
+
