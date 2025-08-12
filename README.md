@@ -225,5 +225,40 @@ from customer c
 right join orders o on c.customer_id = o.customer_id
 right join menu m on o.menu_id = m.menu_id;
 
+#--subquires, filtering 
 
+select first_name, location
+from customer c
+where exists (select 1
+from orders o
+where o.customer_id =  c.customer_id
+);
+
+select varity
+from menu
+where menu_id in (
+select menu_id
+from orders
+where customer_id in (
+select customer_id
+from customer
+where location = 'chennai' ));
+
+select customer_id, first_name, location
+from customer
+where customer_id in (
+select customer_id
+from orders
+where quantity > (select avg(quantity) from orders)
+);
+
+select *
+from menu
+where menu_id in (
+select menu_id
+from orders
+where customer_id in (
+select customer_id
+from customer
+where location = 'chennai' ));
 
