@@ -272,3 +272,35 @@ where c.location = 'chennai';
 show create view customer_orders;
 show full tables where table_type = 'view';
 drop view customer_orders;
+
+delimiter //
+
+create procedure getcustomerorders(in cust_id int)
+begin
+select o.order_id, m.varity, o.quantity
+from orders o
+join menu m on o.menu_id = m.menu_id
+where o.customer_id = cust_id;
+end //
+
+delimiter ;
+
+call getcustomerorders(101);
+
+delimiter //
+
+create function totalquantity(cust_id int)
+returns int
+deterministic
+begin
+declare total int;
+select sum(quantity) into total
+from orders
+where customer_id = cust_id;
+return ifnull(total, 0);
+end //
+
+delimiter ;
+
+
+show procedure status where db = 'your_database';
