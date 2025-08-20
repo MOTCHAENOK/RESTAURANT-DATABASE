@@ -262,3 +262,13 @@ select customer_id
 from customer
 where location = 'chennai' ));
 
+create view chennai_orders  as
+select c.customer_id, c.first_name, m.varity, o.quantity
+from customer c
+join orders o on c.customer_id = o.customer_id
+join menu m on o.menu_id = m.menu_id
+where c.location = 'chennai';
+
+show create view customer_orders;
+show full tables where table_type = 'view';
+drop view customer_orders;
